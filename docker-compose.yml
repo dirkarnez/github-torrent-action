@@ -1,0 +1,32 @@
+version: '3'
+services:
+  deluge:
+    image: lscr.io/linuxserver/deluge:latest
+    container_name: deluge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - DELUGE_LOGLEVEL=error #optional
+    volumes:
+      - ./downloads:/downloads
+    ports:
+      - 8112:8112
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+    
+    
+# services:
+#   deluge:
+#     container_name: webapp-frontend
+#     image: spritsail/deluge:latest
+#     restart: always
+#     ports:
+# #      - "8112:8112"
+#       - "51360:51360/udp"
+#       - "58846:58846"
+#     volumes:
+#       - ./torrents:/media
+# #      - ./config:/config
+# #      - ./downloads:/downloads

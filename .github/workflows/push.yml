@@ -1,0 +1,17 @@
+name: docker-compose-actions-workflow
+on: push
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+#       - uses: actions/checkout@v2
+      - name: Build the stack
+        run: mkdir -p downloads # && docker-compose up --build && docker-compose down
+        
+        # --select-file=194-210 
+      - run: aria2c.exe --seed-time=0 "magnet:?xt=urn:btih:ffef6edbb224113084dcd1b192e4518f6a49e426&dn=Linkin%20Park%20Live%20From%20Madison%20Square%20Garden%202011%20HDTV%201080i.ts&tr=https%3A%2F%2Flp-bits.com%2Fannounce.php%3Fpasskey%3De7c32d0cd70e1b3f0cec1fda5e8482a8" -d "downloads"      
+      
+      - uses: actions/upload-artifact@v2
+        with:
+          name: downloads
+          path: downloads
